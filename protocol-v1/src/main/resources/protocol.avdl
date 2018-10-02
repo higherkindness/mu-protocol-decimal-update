@@ -1,0 +1,17 @@
+@namespace("freestyle.rpc.protocols")
+
+protocol StockInfoService {
+
+  record StockInfoRequest {
+    string stockId;
+  }
+
+  record StockInfoResponse {
+    string stockId;
+    decimal(10,2) price;
+    decimal(5,4) rate;
+  }
+
+  freestyle.rpc.protocols.StockInfoResponse getStockInfo(freestyle.rpc.protocols.StockInfoRequest request);
+
+}
