@@ -1,8 +1,6 @@
-import freestyle.rpc.idlgen.Model._
-
 name := "decimal-migration-guide-service"
 
-version := "2"
+version := "3"
 
 organization := "io.free"
 
@@ -25,13 +23,9 @@ libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.3",
   "io.frees" %% "frees-rpc-server" % "0.15.1-FEDE",
   "io.frees" %% "frees-rpc-client-core" % "0.15.1-FEDE",
-  "io.frees" %% "legacy-avro-decimal-compat-encoders" % "0.15.1-FEDE" exclude("io.frees", "legacy-avro-decimal-compat-model"),
-  "io.frees" % "legacy-avro-decimal-compat-protocol" % "0.15.1-FEDE",
-  "io.frees" % "decimal-migration-guide-protocol" % "2"
+  "io.frees" % "decimal-migration-guide-protocol" % "3"
 )
 
-idlGenBigDecimal := ScalaBigDecimalTaggedGen
-
-idlGenMarshallerImports += CustomMarshallersImport("freestyle.rpc.protocols.legacyAvroDecimalEncoders._")
+idlGenBigDecimal := freestyle.rpc.idlgen.Model.ScalaBigDecimalTaggedGen
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.patch)

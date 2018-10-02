@@ -1,6 +1,6 @@
 name := "decimal-migration-guide-client"
 
-version := "1"
+version := "3"
 
 organization := "io.free"
 

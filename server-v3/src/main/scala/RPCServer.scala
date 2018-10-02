@@ -1,7 +1,6 @@
 package freestyle.rpc
 
 import cats.effect.IO
-import freestyle.rpc.protocols.legacyAvroDecimalUtils.LegacyAvroDecimalCompat
 import freestyle.rpc.protocols._
 import freestyle.rpc.server.{AddService, GrpcConfig, GrpcServer}
 import shapeless.{Nat, tag}
@@ -14,8 +13,6 @@ class StockInfoServiceImpl extends StockInfoService[IO] {
       response =
         StockInfoResponse(
           request.stockId,
-          LegacyAvroDecimalCompat(BigDecimal("30578.86")),
-          LegacyAvroDecimalCompat(BigDecimal("4.342")),
           tag[((Nat._1, Nat._0), Nat._2)][BigDecimal](BigDecimal("30578.86")),
           tag[(Nat._5, Nat._4)][BigDecimal](BigDecimal("4.342"))
         )
