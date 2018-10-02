@@ -1,6 +1,6 @@
 @namespace("freestyle.rpc.protocols")
 
-protocol StockInfoService {
+protocol StockInfoModel {
 
   import idl "legacyAvroDecimalCompatProtocol.avdl";
 
@@ -11,11 +11,9 @@ protocol StockInfoService {
   record StockInfoResponse {
     string stockId;
     freestyle.rpc.protocols.LegacyAvroDecimalCompat price;
-    decimal(10,2) stockPrice;
     freestyle.rpc.protocols.LegacyAvroDecimalCompat rate;
+    decimal(10,2) stockPrice;
     decimal(5,4) stockRate;
   }
-
-  freestyle.rpc.protocols.StockInfoResponse getStockInfo(freestyle.rpc.protocols.StockInfoRequest request);
 
 }
