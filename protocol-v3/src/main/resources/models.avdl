@@ -1,0 +1,15 @@
+@namespace("freestyle.rpc.protocols")
+
+protocol StockInfoModel {
+
+  record StockInfoRequest {
+    string stockId;
+  }
+
+  record StockInfoResponse {
+    string stockId;
+    decimal(10,2) stockPrice;
+    decimal(5,4) stockRate;
+  }
+
+}

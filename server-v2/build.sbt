@@ -35,5 +35,3 @@ idlGenBigDecimal := freestyle.rpc.idlgen.Model.ScalaBigDecimalTaggedGen
 idlGenMarshallerImports += CustomMarshallersImport("freestyle.rpc.protocols.legacyAvroDecimalEncoders._")
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.patch)
-
-//updateOptions := updateOptions.value.withLatestSnapshots(false)
