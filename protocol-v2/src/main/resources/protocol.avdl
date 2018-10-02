@@ -1,0 +1,21 @@
+@namespace("freestyle.rpc.protocols")
+
+protocol StockInfoService {
+
+  import idl "legacyAvroDecimalCompatProtocol.avdl";
+
+  record StockInfoRequest {
+    string stockId;
+  }
+
+  record StockInfoResponse {
+    string stockId;
+    freestyle.rpc.protocols.LegacyAvroDecimalCompat price;
+    decimal(10,2) stockPrice;
+    freestyle.rpc.protocols.LegacyAvroDecimalCompat rate;
+    decimal(5,4) stockRate;
+  }
+
+  freestyle.rpc.protocols.StockInfoResponse getStockInfo(freestyle.rpc.protocols.StockInfoRequest request);
+
+}
