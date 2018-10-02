@@ -18,7 +18,7 @@ srcGenJarNames := Seq("decimal-migration-guide-protocol")
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.3",
-  "io.frees" %% "frees-rpc-client-netty" % "0.15.1-FEDE",
+  "io.frees" %% "frees-rpc-client-netty" % "0.15.1",
   "io.frees" % "decimal-migration-guide-protocol" % "3"
 )
 
