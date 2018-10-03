@@ -10,8 +10,8 @@ protocol StockInfoModel {
 
   record StockInfoResponse {
     string stockId;
-    freestyle.rpc.protocols.LegacyAvroDecimalCompat price;
-    freestyle.rpc.protocols.LegacyAvroDecimalCompat rate;
+    freestyle.rpc.protocol.legacy.AvroDecimalCompat price;
+    freestyle.rpc.protocol.legacy.AvroDecimalCompat rate;
     decimal(10,2) stockPrice;
     decimal(5,4) stockRate;
   }

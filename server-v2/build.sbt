@@ -22,13 +22,13 @@ libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.3",
   "io.frees" %% "frees-rpc-server" % "0.15.1",
   "io.frees" %% "frees-rpc-client-core" % "0.15.1",
-  "io.frees" %% "legacy-avro-decimal-compat-encoders" % "0.15.1" exclude("io.frees", "legacy-avro-decimal-compat-model"),
+  "io.frees" %% "legacy-avro-decimal-compat-encoders" % "0.15.1",
   "io.frees" % "legacy-avro-decimal-compat-protocol" % "0.15.1",
   "io.frees" % "decimal-migration-guide-protocol" % "2"
 )
 
 idlGenBigDecimal := ScalaBigDecimalTaggedGen
 
-idlGenMarshallerImports += CustomMarshallersImport("freestyle.rpc.protocols.legacyAvroDecimalEncoders._")
+idlGenMarshallerImports += CustomMarshallersImport("freestyle.rpc.protocol.legacy.avro._")
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.patch)

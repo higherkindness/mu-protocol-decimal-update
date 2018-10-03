@@ -14,7 +14,7 @@ srcGenSerializationType := "Avro"
 
 sourceGenerators in Compile += (srcGen in Compile).taskValue
 
-srcGenJarNames := Seq("legacy-avro-decimal-compat-protocol", "decimal-migration-guide-protocol")
+srcGenJarNames := Seq("decimal-migration-guide-protocol")
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.3",
