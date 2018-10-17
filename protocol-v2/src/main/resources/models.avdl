@@ -6,6 +6,7 @@ protocol StockInfoModel {
 
   record StockInfoRequest {
     string stockId;
+    union { null, string } optionalValue = null;
   }
 
   record StockInfoResponse {
