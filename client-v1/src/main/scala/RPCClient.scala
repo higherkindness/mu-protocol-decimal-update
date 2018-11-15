@@ -1,7 +1,10 @@
-package freestyle.rpc
+package freestyle.rpc.protocols
 
 import cats.effect.IO
-import freestyle.rpc.protocols.{StockInfoRequest, StockInfoService}
+import freestyle.rpc.{ChannelFor, ChannelForAddress}
+import freestyle.rpc.protocols.protocol.StockInfoService
+import freestyle.rpc.protocols.protocolModels.{Hard, StockInfoRequest, Temp}
+import shapeless.{:+:, CNil, Coproduct}
 
 object RPCClient extends App {
 
@@ -12,7 +15,7 @@ object RPCClient extends App {
   val serviceClient: StockInfoService.Client[IO] =
     StockInfoService.client[IO](channelFor)
 
-  val request: StockInfoRequest = StockInfoRequest("stockId")
+  val request: StockInfoRequest = StockInfoRequest("stockId", Coproduct[Temp :+: Hard :+: CNil](Temp()))
 
   val app: IO[Unit] = for {
     _ <- IO(println(s"Calling server with request $request"))
@@ -20,6 +23,8 @@ object RPCClient extends App {
     _ <- IO(println(s"Response $result"))
   } yield ()
 
-  app.unsafeRunSync()
+    app.unsafeRunSync()
+
+  System.in.read()
 
 }

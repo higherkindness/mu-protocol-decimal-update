@@ -1,9 +1,0 @@
-@namespace("freestyle.rpc.protocols")
-
-protocol StockInfoService {
-
-  import idl "models.avdl";
-
-  freestyle.rpc.protocols.StockInfoResponse getStockInfo(freestyle.rpc.protocols.StockInfoRequest request);
-
-}

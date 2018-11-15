@@ -1,8 +1,10 @@
-package freestyle.rpc
+package freestyle.rpc.protocols
 
 import cats.effect.IO
-import freestyle.rpc.protocols.{StockInfoRequest, StockInfoResponse, StockInfoService}
-import freestyle.rpc.server.{AddService, GrpcConfig, GrpcServer}
+import freestyle.rpc.protocols.protocol.StockInfoService
+import freestyle.rpc.protocols.protocolModels.{StockInfoRequest, StockInfoResponse}
+import freestyle.rpc.server.{AddService, GrpcConfig, ServerW}
+import freestyle.rpc.server.implicits._
 
 class StockInfoServiceImpl extends StockInfoService[IO] {
   def getStockInfo(request: StockInfoRequest): IO[StockInfoResponse] =
@@ -23,6 +25,7 @@ object RPCServer extends App {
     AddService(StockInfoService.bindService[IO])
   )
 
-  val runServer = GrpcServer.default[IO](8080, grpcConfigs).flatMap(GrpcServer.server[IO])
-  runServer.unsafeRunSync()
+  implicit val serverW: ServerW = ServerW.default(8080, grpcConfigs)
+
+  server[IO].unsafeRunSync()
 }
