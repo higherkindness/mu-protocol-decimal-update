@@ -1,8 +1,8 @@
-package freestyle.rpc
+package higherkindness.mu.example
 
-import cats.effect.IO
-import freestyle.rpc.protocols.{StockInfoRequest, StockInfoResponse, StockInfoService}
-import freestyle.rpc.server.{AddService, GrpcConfig, GrpcServer}
+import cats.effect._
+import higherkindness.mu.protocols._
+import higherkindness.mu.rpc.server.{AddService, GrpcConfig, GrpcServer}
 
 class StockInfoServiceImpl extends StockInfoService[IO] {
   def getStockInfo(request: StockInfoRequest): IO[StockInfoResponse] =
@@ -15,14 +15,20 @@ class StockInfoServiceImpl extends StockInfoService[IO] {
 
 object RPCServer extends App {
 
-  implicit val S: monix.execution.Scheduler = monix.execution.Scheduler.Implicits.global
+  implicit val EC: scala.concurrent.ExecutionContext =
+    scala.concurrent.ExecutionContext.Implicits.global
+
+  implicit val timer: Timer[cats.effect.IO]     = IO.timer(EC)
+  implicit val cs: ContextShift[cats.effect.IO] = IO.contextShift(EC)
 
   implicit val service: StockInfoService[IO] = new StockInfoServiceImpl
 
-  val grpcConfigs: List[GrpcConfig] = List(
-    AddService(StockInfoService.bindService[IO])
-  )
+  val grpcConfigs: IO[GrpcConfig] =
+    StockInfoService.bindService[IO].map(AddService(_))
 
-  val runServer = GrpcServer.default[IO](8080, grpcConfigs).flatMap(GrpcServer.server[IO])
-  runServer.unsafeRunSync()
+  (for {
+    grpcConfig <- StockInfoService.bindService[IO].map(AddService(_))
+    grpcServer <- GrpcServer.default[IO](8080, List(grpcConfig))
+    _          <- GrpcServer.server[IO](grpcServer)
+  } yield ()).unsafeRunSync()
 }
