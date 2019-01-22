@@ -1,10 +1,10 @@
-import freestyle.rpc.idlgen.Model._
+import higherkindness.mu.rpc.idlgen.Model._
 
 name := "decimal-migration-guide-service"
 
 version := "2"
 
-organization := "io.free"
+organization := "io.higherkindness"
 
 scalaVersion := "2.12.7"
 
@@ -20,15 +20,15 @@ srcGenJarNames := Seq("legacy-avro-decimal-compat-protocol", "decimal-migration-
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.3",
-  "io.frees" %% "frees-rpc-server" % "0.15.1",
-  "io.frees" %% "frees-rpc-client-core" % "0.15.1",
-  "io.frees" %% "legacy-avro-decimal-compat-encoders" % "0.15.1",
-  "io.frees" % "legacy-avro-decimal-compat-protocol" % "0.15.1",
-  "io.frees" % "decimal-migration-guide-protocol" % "2"
+  "io.higherkindness" %% "mu-rpc-server" % "0.17.0",
+  "io.higherkindness" %% "mu-rpc-channel" % "0.17.0",
+  "io.higherkindness" %% "legacy-avro-decimal-compat-encoders" % "0.17.0",
+  "io.higherkindness" % "legacy-avro-decimal-compat-protocol" % "0.17.0",
+  "io.higherkindness" % "decimal-migration-guide-protocol" % "2"
 )
 
 idlGenBigDecimal := ScalaBigDecimalTaggedGen
 
-idlGenMarshallerImports += CustomMarshallersImport("freestyle.rpc.protocol.legacy.avro._")
+idlGenMarshallerImports += CustomMarshallersImport("higherkindness.mu.rpc.protocol.legacy.avro._")
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.patch)

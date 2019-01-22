@@ -1,9 +1,9 @@
-@namespace("freestyle.rpc.protocols")
+@namespace("higherkindness.mu.protocols")
 
 protocol StockInfoService {
 
   import idl "models.avdl";
 
-  freestyle.rpc.protocols.StockInfoResponse getStockInfo(freestyle.rpc.protocols.StockInfoRequest request);
+  higherkindness.mu.protocols.StockInfoResponse getStockInfo(higherkindness.mu.protocols.StockInfoRequest request);
 
 }

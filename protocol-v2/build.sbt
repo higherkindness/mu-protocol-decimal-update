@@ -2,7 +2,7 @@ name := "decimal-migration-guide-protocol"
 
 version := "2"
 
-organization := "io.frees"
+organization := "io.higherkindness"
 
 scalaVersion := "2.12.7"
 

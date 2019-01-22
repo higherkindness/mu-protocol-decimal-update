@@ -1,1 +1,1 @@
-addSbtPlugin("io.frees" % "sbt-frees-rpc-idlgen" % "0.15.0")
+addSbtPlugin("io.higherkindness" % "sbt-mu-idlgen" % "0.17.0")
