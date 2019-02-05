@@ -6,10 +6,27 @@ protocol StockInfoModel {
     string stockId;
   }
 
+  record Common {}
+
+  record Foo1 {
+    Common common;
+    array<string> list;
+  }
+
+  record Foo2 {
+    string v1;
+    string v2;
+  }
+  record Foo3 {
+    boolean val;
+  }
+
   record StockInfoResponse {
-    string stockId;
-    decimal(10,2) price;
-    decimal(5,4) rate;
+    union {
+      Foo3,
+      Foo2,
+      Foo1
+    } value;
   }
 
 }

@@ -2,18 +2,40 @@
 
 protocol StockInfoModel {
 
-  import idl "legacyAvroDecimalCompatProtocol.avdl";
-
   record StockInfoRequest {
     string stockId;
   }
 
+  record Common {}
+
+  record Foo1 {
+    Common common;
+    array<string> list;
+  }
+
+  record Foo2 {
+    string v1;
+    string v2;
+  }
+  record Foo3 {
+    boolean val;
+  }
+
+  record Bar1 {
+    union {null, string} optional;
+    Common common;
+  }
+
   record StockInfoResponse {
-    string stockId;
-    higherkindness.mu.rpc.protocol.legacy.AvroDecimalCompat price;
-    higherkindness.mu.rpc.protocol.legacy.AvroDecimalCompat rate;
-    decimal(10,2) stockPrice;
-    decimal(5,4) stockRate;
+    union {
+      Foo3,
+      Foo2,
+      Foo1
+    } value;
+    union {
+      Bar1,
+      Foo1
+    } value2;
   }
 
 }

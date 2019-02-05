@@ -1,10 +1,10 @@
 package higherkindness.mu.example
 
 import cats.effect._
-import higherkindness.mu.protocols.{StockInfoRequest, StockInfoResponse, StockInfoService}
+import higherkindness.mu.protocols._
 import higherkindness.mu.rpc.protocol.legacy.AvroDecimalCompatUtils._
 import higherkindness.mu.rpc.server.{AddService, GrpcConfig, GrpcServer}
-import shapeless.{Nat, tag}
+import shapeless._
 
 class StockInfoServiceImpl extends StockInfoService[IO] {
 
@@ -12,13 +12,7 @@ class StockInfoServiceImpl extends StockInfoService[IO] {
     for {
       _ <- IO(println(s"Receiving request $request"))
       response =
-        StockInfoResponse(
-          request.stockId,
-          AvroDecimalCompat(BigDecimal("30578.86")),
-          AvroDecimalCompat(BigDecimal("4.342")),
-          tag[((Nat._1, Nat._0), Nat._2)][BigDecimal](BigDecimal("30578.86")),
-          tag[(Nat._5, Nat._4)][BigDecimal](BigDecimal("4.342"))
-        )
+        StockInfoResponse(Coproduct[Foo3 :+: Foo2 :+: Foo1 :+: CNil](Foo1(Common(), Nil)), Left(Bar1(None, Common())))
       _ <- IO(println(s"Generating response $response"))
     } yield response
 

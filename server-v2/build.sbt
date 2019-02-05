@@ -12,7 +12,7 @@ resolvers += Resolver.bintrayRepo("beyondthelines", "maven")
 
 idlType := "avro"
 
-srcGenSerializationType := "Avro"
+srcGenSerializationType := "AvroWithSchema"
 
 sourceGenerators in Compile += (srcGen in Compile).taskValue
 
